@@ -1,0 +1,26 @@
+from bs4 import BeautifulSoup
+from selenium import webdriver
+
+driver = webdriver.Chrome("C:\\Users\\seonb\\OneDrive\\Desktop\\sparta\\venv\\chromedriver.exe")
+
+url = "https://search.naver.com/search.naver?where=news&sm=tab_jum&query=추석"
+
+driver.get(url)
+req = driver.page_source
+soup = BeautifulSoup(req, 'html.parser')
+
+articles = soup.select('#main_pack > section.sc_new.sp_nnews._prs_nws > div > div.group_news > ul > li')
+
+for article in articles:
+    title = article.select_one('li > div > div > a').text
+    url = article.select_one('li > div > div > a')['href']
+    if article.select_one('span > span > cite') == None:
+        comp = ' '
+    else:
+        comp = article.select_one('span > span > cite').text
+
+
+    print(title, url, comp)
+
+
+driver.quit()
