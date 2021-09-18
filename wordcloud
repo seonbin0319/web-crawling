@@ -1,0 +1,28 @@
+from wordcloud import WordCloud
+
+# f = open("test.txt", "w", encoding="utf-8")
+# f.write("안녕, 스파르타!\n")
+#
+# for i in [1,2,3,4,5]:
+#     f.write(f"{i}번째 출력중이에요\n")
+#
+# f.close()
+text = ''
+with open("venv/kakaotalk.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+    for line in lines:
+        text += line
+#
+# print(text)
+
+
+wc = WordCloud(font_path='C:/windows/Fonts/msgothic.ttc', background_color="white", width=600, height=400)
+wc.generate(text)
+wc.to_file("result.png")
+
+# import matplotlib.font_manager as fm
+#
+# # 이용 가능한 폰트 중 '고딕'만 선별
+# for font in fm.fontManager.ttflist:
+#     if 'Gothic' in font.name:
+#         print(font.name, font.fname)
